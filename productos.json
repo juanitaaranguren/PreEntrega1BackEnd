@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "title": "Olds 88 Rocket",
+        "description": "The Olds 88 Rocket is a classic American sedan that defined an era with its powerful V8 engine and sleek design. Known for its smooth ride and iconic rocket-themed emblems, this car symbolizes the golden age of American automobiles.",
+        "code": "01",
+        "price": 90000,
+        "estatus": true, 
+        "stock": 1,
+        "category": "Muscle car"
+    },
+    {
+        "id": 2,
+        "title": "Mercury Cougar 427",
+        "description": "The Mercury Cougar 427 is a legendary muscle car that roared onto the scene with its massive 427-cubic-inch engine. With its distinctive cat-like styling and unmatched power, this feline-inspired beast was built for speed and performance.",
+        "code": "02",
+        "price": 80000,
+        "estatus": true,
+        "stock": 1,
+        "category": "Muscle car"
+    },
+    {
+        "id": 3,
+        "title": "AMC Javelin AMX 401",
+        "description": "The AMC Javelin AMX 401 is a rare gem in the muscle car world. With its aggressive styling and a high-performance 401-cubic-inch V8 engine, it was AMC's answer to the muscle car craze of the '60s and '70s. This car is a true enthusiast's delight.",
+        "code": "03",
+        "price": 70000,
+        "estatus": true,
+        "stock": 1,
+        "category": "Muscle car"
+    },
+    {
+        "id": 4,
+        "title": "Chevrolet Chevelle SS 454",
+        "description": "The Chevrolet Chevelle SS 454 is an icon of American muscle. Equipped with a massive 454-cubic-inch V8 engine, it's a tire-scorching powerhouse that combined raw power with timeless style. A symbol of speed and strength",
+        "code": "04",
+        "price": 60000,
+        "estatus": true,
+        "stock": 1,
+        "category": "Muscle car"
+    },
+    {
+        "id": 5,
+        "title": "Chevrolet Camaro Z28",
+        "description": "The Chevrolet Camaro Z28 is a high-performance legend that has been tearing up tracks and streets for generations. With its aggressive stance, aerodynamic design, and a potent V8 engine, it's a true muscle car aficionado's dream, delivering an exhilarating driving experience.",
+        "code": "05",
+        "price": 50000,
+        "estatus": true,
+        "stock": 1,
+        "category": "Muscle car"
+    }
+]
