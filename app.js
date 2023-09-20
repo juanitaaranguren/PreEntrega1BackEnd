@@ -2,9 +2,17 @@ const express = require("express");
 const app = express();
 const PORT = 8080;
 const fs = require('fs');
+const http = require('http');
+const exphbs = require('express-handlebars');
+const socketIo = require('socket.io');
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+
+app.engine('handlebars', exphbs());
+app.set('view engine', 'handlebars');
 
 const productosFilePath = './src/productos.json';
 const carritosFilePath = './src/carrito.json';
@@ -50,6 +58,31 @@ function saveCartsToFile() {
     }
 }
 
+
+const server = http.createServer(app);
+const io = socketIo(server);
+
+
+const productNamespace = io.of('/products');
+
+productNamespace.on('connection', (socket) => {
+    console.log('Usuario conectado a la sala de productos');
+
+    socket.on('disconnect', () => {
+        console.log('Usuario desconectado de la sala de productos');
+    });
+});
+
+
+app.get("/", (req, res) => {
+    res.render("home", { products });  
+});
+
+
+app.get("/realtimeproducts", (req, res) => {
+    res.render("realTimeProducts", { products }); 
+});
+
 app.get("/api/products", (req, res) => {
     res.json(products);
 });
@@ -68,6 +101,10 @@ app.post("/api/products", (req, res) => {
     };
     products.push(newProduct);
     saveProductsToFile();
+
+   
+    productNamespace.emit('updateProductList', products);
+
     res.status(201).json(newProduct);
 });
 
@@ -89,6 +126,10 @@ app.put("/api/products/:id", (req, res) => {
         };
 
         saveProductsToFile();
+
+        
+        productNamespace.emit('updateProductList', products);
+
         res.json(products[productIndex]);
     } else {
         res.status(404).json({ message: "Producto no encontrado" });
@@ -99,6 +140,10 @@ app.delete("/api/products/:id", (req, res) => {
     const productId = parseInt(req.params.id);
     products = products.filter((product) => product.id !== productId);
     saveProductsToFile();
+
+    
+    productNamespace.emit('updateProductList', products);
+
     res.json({ message: "Producto borrado exitosamente" });
 });
 
@@ -141,6 +186,7 @@ app.post("/api/carts/:cid/product/:pid", (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
+
+server.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
