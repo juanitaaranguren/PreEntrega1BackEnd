@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.engine('handlebars', exphbs());
+
 app.set('view engine', 'handlebars');
 
 const productosFilePath = './src/productos.json';
