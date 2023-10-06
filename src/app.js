@@ -1,4 +1,36 @@
-const express = require("express");
+
+const express = require('express');
+const mongoose = require('mongoose');
+const app = express();
+const port = 8080;
+const productRouter = require ('./Dao/routes/product.router')
+const { productModel } = require('./Dao/models/product.model');
+const userRouter = require ('./Dao/routes/user.router')
+const { userModel } = require('./Dao/models/user.model');
+const messageRouter = require ('./Dao/routes/message.routes')
+const { messageModel } = require('./Dao/models/message.model');
+
+
+app.listen (port, ()=> {
+    console.log(`servidor corriendo en el puerto ${port}`)
+})
+
+app.use (express.json())
+mongoose.connect("mongodb+srv://up:up123@cluster0.jh7kmjo.mongodb.net/?retryWrites=true&w=majority")
+
+.then (() => {
+    console.log ("conectado a la base")
+})
+.catch (error => {
+    console.error ("error de conexión", error);
+})
+
+app.use("/api/products", productRouter)
+app.use("/api/users", userRouter)
+app.use("/api/messages", messageRouter)
+
+
+/* const express = require("express");
 const app = express();
 const PORT = 8080;
 const fs = require('fs');
@@ -7,7 +39,7 @@ const exphbs = require('express-handlebars');
 const socketIo = require('socket.io');
 
 
-app.use(express.json());
+ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
@@ -189,4 +221,5 @@ app.post("/api/carts/:cid/product/:pid", (req, res) => {
 
 server.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
-});
+}); */
+
